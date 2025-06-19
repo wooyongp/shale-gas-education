@@ -204,8 +204,8 @@ data <- data |>
 data |> filter(!is.na(MIGPLAC1)) |> count(YEAR)
 
 data <- data |> mutate(
-  from_treat_to_control = if_else(!(STATEFIP %in% treatlist) & MIGPLAC1 %in% treatlist, 1, 0),
-  from_control_to_treat = if_else((STATEFIP %in% treatlist) & !(MIGPLAC1 %in% treatlist), 1, 0)
+  from_treat_to_control = if_else(!(STATEFIP %in% treatlist) & MIGPLAC1 %in% treatlist & MIGPLAC1!=0, 1, 0),
+  from_control_to_treat = if_else((STATEFIP %in% treatlist) & !(MIGPLAC1 %in% treatlist) & MIGPLAC1!=0, 1, 0)
 )
 
 df <- data |> filter(STATEFIP %in% treatlist) |> 
@@ -224,4 +224,36 @@ ggplot(df |> filter(YEAR>=2002), aes(YEAR, avg_from_control_to_treat)) +
   facet_wrap(~state_name, scales="free_y")
 ggsave("doc/figures/pop_ratio_from_outside.png", width=20, height=15, unit="cm")
 
-df$STATEFIP
+temp <- data |> filter(STATEFIP %in% treatlist) |> 
+  group_by(incomeQ, STATEFIP, YEAR) |> 
+  summarize(avg_from_control_to_treat = weighted.mean(from_control_to_treat, w=PERWT)*100) |> 
+  left_join(treat_time, by = c("STATEFIP" = "statefip")) |> 
+  filter(YEAR==treat_year) |> ungroup() |> 
+  rename(reference_ratio = avg_from_control_to_treat) |> 
+  select(-treat_year, -YEAR)
+
+df <- data |> filter(STATEFIP %in% treatlist) |> 
+  group_by(incomeQ, STATEFIP, YEAR) |> 
+  summarize(avg_from_control_to_treat = weighted.mean(from_control_to_treat, w=PERWT)*100) |> 
+  ungroup() |> 
+  left_join(temp, by = c("incomeQ", "STATEFIP")) |> 
+  arrange(STATEFIP, incomeQ, YEAR) |> 
+  group_by(STATEFIP, incomeQ) |> 
+  mutate(avg_from_control_to_treatN = avg_from_control_to_treat/reference_ratio) |> 
+  ungroup()
+
+df <- df |> left_join(treat_time, by = c("STATEFIP" = "statefip"))
+
+df <- df |> mutate(state_name = as_factor(STATEFIP))
+
+
+
+ggplot(df |> filter(YEAR>=2002, state_name %in% c("North Dakota", "Oklahoma")) |> 
+  mutate(incomeQ=factor(incomeQ)), aes(YEAR, avg_from_control_to_treatN)) +
+  geom_line(aes(color = incomeQ, group = incomeQ)) +
+  geom_vline(aes(xintercept=treat_year), color="red", linetype = "dashed") +
+  scale_y_continuous(name = "normalized population ratio") +
+  scale_color_brewer(palette = "Spectral") +
+  facet_wrap(~state_name, scales="free_y")
+ggsave("doc/figures/pop_ratio_from_outside - by income quartile.png", width=20, height=15, unit="cm")
+
