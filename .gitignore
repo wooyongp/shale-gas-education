@@ -1,3 +1,4 @@
 *.parquet
 doc/
 **/cache
+guidelines/
