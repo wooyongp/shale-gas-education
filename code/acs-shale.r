@@ -18,18 +18,6 @@ data <- data |> mutate(treated = if_else(STATEFIP %in% treatlist, 1, 0))
 
 treat_time <- tibble(statefip = treatlist, treat_year = c(2008, 2006, 2008, 2007, 2006, 2008,2005, 2008))
 
-# schlyrs function
-educD_to_schlyrs <- function(educD){
-  case_when(
-    educD == 1 ~ NA, educD <= 12 ~ 0, educD %in% 13:14 ~ 1,
-    educD == 15 ~ 2, educD == 16 ~ 3, educD == 17 ~ 4,
-    educD %in% 20:22 ~ 5, educD == 23 ~ 6, educD %in% 24:25 ~ 7,
-    educD == 26 ~ 8, educD == 30 ~ 9, educD == 40 ~ 10,
-    educD == 50 ~ 11, educD %in% 60:65 ~ 12, educD %in% 70:71 ~ 13,
-    educD %in% 80:83 ~ 14, educD == 90 ~ 15, educD %in% 100:101 ~ 16,
-    educD == 110 ~ 17, educD == 111 ~ 18, educD == 112 ~ 19,
-    educD %in% 113:115 ~ 20, educD == 116 ~ 24, educD == 999 ~ NA, .default = NA) }
-
 data <- data |> left_join(treat_time, by = c("STATEFIP" = "statefip"))
 
 data <- data |> mutate(school_years = educD_to_schlyrs(EDUCD)) 
@@ -53,6 +41,8 @@ data <- data |> mutate(id = paste0(SERIAL, SAMPLE, collapse='-'))
 data <- data |> mutate(log_INCTOT = log(INCTOT))
 
 data <- data |> mutate(college = as.integer(EDUCD>=62))
+
+data <- data |> mutate(race_simplified = race_simplified(RACE, HISPAN))
 
 
 ## compute income quantile by year
@@ -89,6 +79,7 @@ data <- data |>
 
 
 
+## EIA shale gas production(plot)----
 shale_by_states <- readxl::read_excel("data/EIA shale gas production(State).xlsx", sheet="Sheet1", skip=1)
 
 shale_by_states <- shale_by_states |> 
@@ -425,7 +416,48 @@ for(i in 1:4){
 sadid_plot_quartile(out1, out2, out3, out4)
 ggsave("doc/figures/did-base/sadid(college share - by income quartile).png", width=20, height=15, unit="cm")
 
-# negative effect on old enrollment
+## by race
+df <- data |> filter(AGE>=18, AGE<25) |> 
+  mutate(race_simplified = race_simplified(RACE, HISPAN)) |> 
+  group_by(YEAR, STATEFIP,  race_simplified) |> 
+  summarize(avg_college_share = weighted.mean(college, w=PERWT), 
+            # log_INCTOT = weighted.mean(log_INCTOT, w=PERWT, na.rm=TRUE),
+            total_pop = sum(PERWT),
+            treat_year = mean(treat_year)) |> ungroup()
+
+simplified_race_vector <- c("White", "Black", "Hispanic", "Asian", "Others")
+
+for(i in race_simplified_vector){
+  v <- att_gt(
+    yname = "avg_college_share",
+    gname = "treat_year",
+    idname = "STATEFIP",
+    tname = "YEAR",
+    xformla = ~1,
+    data = df |> filter(race_simplified == i),
+    weights = "total_pop",
+    control_group = "notyettreated",
+    # est_method = "reg",
+    cores=4
+  ) |> aggte(type="dynamic")
+  assign(paste0("out", i), v)
+  rm(v)
+}
+
+csdid_plot_race_simplified(outAsian, outBlack, outHispanic, outWhite, outOthers)
+ggsave("doc/figures/did-base/csdid(college_share- by race).png", width=20, height=15, unit="cm")
+
+
+for(i in race_simplified_vector){
+  v <- fixest::feols(college ~ sunab(treat_year, YEAR) | STATEFIP + YEAR, filter(data,AGE>=18, AGE<25, race_simplified==i), weights=filter(data,AGE>=18, AGE<25, race_simplified==i)$PERWT)
+  assign(paste0("out", i), v)
+  rm(v)
+}
+
+sadid_plot_race_simplified(outAsian, outBlack, outHispanic, outWhite, outOthers)
+ggsave("doc/figures/did-base/sadid(college share - by race).png", width=20, height=15, unit="cm")
+
+# effects on high school students' enrollment
 df <- data |> filter(AGE>=16, AGE<=18, SCHOOL!=0) |> 
   group_by(YEAR, STATEFIP) |> 
   summarize(enrollment_rate = weighted.mean(as.integer(SCHOOL==2), w=PERWT), 
@@ -456,7 +488,7 @@ df <- data |> filter(AGE>=16, AGE<=18, SCHOOL!=0) |>
             # log_INCTOT = weighted.mean(log_INCTOT, w=PERWT, na.rm=TRUE),
             total_pop = sum(HHWT),
             treat_year = mean(treat_year)) |> 
-  ngroup()
+  ungroup()
 
 for(i in 1:4){
   v <- att_gt(
@@ -589,80 +621,3 @@ sadid_plot_quartile(out1, out2, out3, out4)
 ggsave("doc/figures/did-base/sadid(young school attendance - by income quartile).png", width=20, height=15, unit="cm")
 
 
-## ----child's education----
-
-
-#  # sadid
-# df <-  data |> filter(AGE>=6, AGE<12) |> mutate(SCHOOL = if_else(SCHOOL==2, 1, if_else(SCHOOL==1, 0, NA)))
-
-
-# # temp <- df |> slice_sample(n=60, by=c("STATEFIP", "YEAR"))
-# l <- fixest::feols(SCHOOL ~ sunab(treat_year, YEAR) | STATEFIP + YEAR, df, weights=df$PERWT)
-
-# sadid_plot(l)
-# ggsave("doc/figures/did-base/sadid(school attendance young).png", width=20, height=15, unit="cm")
-
-# for(i in 1:4){
-#   v <- fixest::feols(school_years ~ sunab(treat_year, YEAR) | STATEFIP + YEAR, filter(data, AGE>=6, AGE<12, fincomeQ==i), weights=filter(data, AGE>=6, AGE<12, fincomeQ==i)$HHWT)
-#   assign(paste0("out", i), v)
-#   rm(v)
-# }
-
-# sadid_plot_quartile(out1, out2, out3, out4)
-# ggsave("doc/figures/did-base/sadid(school attendance young - by income quartile).png", width=20, height=15, unit="cm")
-
-
-
-# df <- data |> filter( AGE>=6, AGE<12, SCHOOL!=0) |> 
-#   group_by(YEAR, STATEFIP) |> 
-#   summarize(enrollment_rate = weighted.mean(as.integer(SCHOOL==2), w=PERWT), 
-#             # log_INCTOT = weighted.mean(log_INCTOT, w=PERWT, na.rm=TRUE),
-#             total_pop = sum(PERWT),
-#             treat_year = mean(treat_year)) |> ungroup()
-
-# out <- att_gt(
-#   yname = "enrollment_rate",
-#   gname = "treat_year",
-#   idname = "STATEFIP",
-#   tname = "YEAR",
-#   xformla = ~1,
-#   data = df,
-#   weights = "total_pop",
-#   control_group = "notyettreated",
-#   # est_method = "reg",
-#   cores=4
-# )
-
-# event_study <- aggte(out, type = "dynamic")
-
-# event_study |> broom::tidy() |> csdid_plot()
-# ggsave("doc/figures/did-base/csdid(young enrollment).png")
-
-
-# df <- data |> filter(AGE>=6, AGE<12) |> 
-#   mutate(SCHOOL = if_else(SCHOOL==2, 1, if_else(SCHOOL==1, 0, NA))) |> 
-#   group_by(YEAR, STATEFIP, fincomeQ) |> 
-#   summarize(avg_enrollment = weighted.mean(SCHOOL, w=HHWT), 
-#             # log_INCTOT = weighted.mean(log_INCTOT, w=PERWT, na.rm=TRUE),
-#             total_pop = sum(HHWT),
-#             treat_year = mean(treat_year)) |> ungroup()
-
-# for(i in 1:4){
-#   v <- att_gt(
-#     yname = "avg_enrollment",
-#     gname = "treat_year",
-#     idname = "STATEFIP",
-#     tname = "YEAR",
-#     xformla = ~1,
-#     data = df |> filter(fincomeQ==i),
-#     weights = "total_pop",
-#     control_group = "notyettreated",
-#     # est_method = "reg",
-#     cores=4
-#   ) |> aggte(type="dynamic")
-#   assign(paste0("out", i), v)
-#   rm(v)
-# }
-
-# csdid_plot_quartile(out1, out2, out3, out4)
-# ggsave("doc/figures/did-base/csdid(young enrollment - by income quartile).png")
