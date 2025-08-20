@@ -2,3 +2,5 @@
 doc/
 **/cache
 !doc/*.pdf
+!doc/*.tex
+!doc/*.bib
