@@ -1,0 +1,4 @@
+.sourceCode {
+  max-height: 300px;  /* Adjust this value as needed */
+  overflow-y: auto;
+}

@@ -1,0 +1,48 @@
+---
+title: "Metalearners for Panel Data(Sketch)"
+author: "Wooyong Park"
+date: today
+format:
+  html:
+    code-overflow: scroll
+    toc: true
+    html-math-method: katex
+    css: styles.css
+    theme: cosmo
+---
+
+
+# Motivation
+
+Currently, the `grf` package and causal forests do not support panel ata.
+However, researchers often use panel data to estimate causal effects, and 
+as Athey and Imbens (2016) show, data-driven HTE estimation has much better qualities compared to testing researchers' pre-defined hypotheses.
+
+
+# Metalearner
+
+## X-Learner
+
+
+## R-Learner
+
+\begin{align}
+R &= A\tau(X) + g_0(X) + \varepsilon \label{eq:R} \\
+A &= m_o(X) + \nu \label{eq:A}
+\end{align}
+
+where 
+
+
+# Staggered Treatment Assumptions
+
+As Sun and Abraham (2020) does, we also need the constant dynamic treatment effect assumption:
+
+\begin{align}
+G_
+\end{align}
+
+where
+
++ $G_i = \min \{t: D_{i,t}=1\}$ is the first period that the individual $i$ is treated.
++ $D_{i,t}$ is the treatment indicator for individual $i$ in period $t$.
