@@ -1,6 +1,9 @@
 *.parquet
+*.duckdb
 doc/
 **/cache
 !doc/*.pdf
 !doc/*.tex
 !doc/*.bib
+.DS_Store
+.DS_Store
