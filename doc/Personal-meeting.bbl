@@ -1,0 +1,201 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nyt/global//global/global/global}
+  \entry{carpenter2019texas}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=CCW}{%
+         family={Carpenter},
+         familyi={C\bibinitperiod},
+         given={Craig\bibnamedelima Wesley},
+         giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=AD}{%
+         family={Anderson},
+         familyi={A\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=DR}{%
+         family={Dudensing},
+         familyi={D\bibinitperiod},
+         given={Rebekka},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CCWADDR1}
+    \strng{fullhash}{CCWADDR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{labeldatesource}{}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{number}{2}
+    \field{pages}{199\bibrangedash 218}
+    \field{title}{The Texas drilling boom and local human capital investment}
+    \field{volume}{51}
+    \field{journaltitle}{Journal of Agricultural and Applied Economics}
+    \field{year}{2019}
+  \endentry
+
+  \entry{rickman2017shale}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=RDS}{%
+         family={Rickman},
+         familyi={R\bibinitperiod},
+         given={Dan\bibnamedelima S},
+         giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=WH}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Hongbo},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=WJV}{%
+         family={Winters},
+         familyi={W\bibinitperiod},
+         given={John\bibnamedelima V},
+         giveni={J\bibinitperiod\bibinitdelim V\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{RDSWHWJV1}
+    \strng{fullhash}{RDSWHWJV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2017}
+    \field{labeldatesource}{}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{pages}{283\bibrangedash 290}
+    \field{title}{Is shale development drilling holes in the human capital pipeline?}
+    \field{volume}{62}
+    \field{journaltitle}{Energy Economics}
+    \field{year}{2017}
+  \endentry
+
+  \entry{sun_estimating_2021}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=SL}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Liyang},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=AS}{%
+         family={Abraham},
+         familyi={A\bibinitperiod},
+         given={Sarah},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \keyw{Difference-in-differences, Pretrend test, Two-way fixed effects}
+    \strng{namehash}{SLAS1}
+    \strng{fullhash}{SLAS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2021}
+    \field{labeldatesource}{}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{abstract}{%
+    To estimate the dynamic effects of an absorbing treatment, researchers often use two-way fixed effects regressions that include leads and lags of the treatment. We show that in settings with variation in treatment timing across units, the coefficient on a given lead or lag can be contaminated by effects from other periods, and apparent pretrends can arise solely from treatment effects heterogeneity. We propose an alternative estimator that is free of contamination, and illustrate the relative shortcomings of two-way fixed effects regressions with leads and lags through an empirical application.%
+    }
+    \field{number}{2}
+    \field{pages}{175\bibrangedash 199}
+    \field{shortjournal}{Journal of Econometrics}
+    \field{title}{Estimating dynamic treatment effects in event studies with heterogeneous treatment effects}
+    \field{volume}{225}
+    \verb{file}
+    \verb ScienceDirect Snapshot:/Users/wooyongpark/Zotero/storage/BMNASQYB/S03
+    \verb 0440762030378X.html:text/html;Submitted Version:/Users/wooyongpark/Zo
+    \verb tero/storage/4SKC9KF9/Sun and Abraham - 2021 - Estimating dynamic tre
+    \verb atment effects in event studies with heterogeneous treatment effects.
+    \verb pdf:application/pdf
+    \endverb
+    \field{journaltitle}{Journal of Econometrics}
+    \field{year}{2021}
+  \endentry
+
+  \entry{wang2024longbet}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=WM}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Meijia},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=MI}{%
+         family={Martinez},
+         familyi={M\bibinitperiod},
+         given={Ignacio},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=HPR}{%
+         family={Hahn},
+         familyi={H\bibinitperiod},
+         given={P\bibnamedelima Richard},
+         giveni={P\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WMMIHPR1}
+    \strng{fullhash}{WMMIHPR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2024}
+    \field{labeldatesource}{}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{Longbet: Heterogeneous treatment effect estimation in panel data}
+    \field{journaltitle}{arXiv preprint arXiv:2406.02530}
+    \field{year}{2024}
+  \endentry
+
+  \entry{weinstein2011economic}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=WAL}{%
+         family={Weinstein},
+         familyi={W\bibinitperiod},
+         given={Amanda\bibnamedelima L},
+         giveni={A\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=PMD}{%
+         family={Partridge},
+         familyi={P\bibinitperiod},
+         given={Mark\bibnamedelima D},
+         giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WALPMD1}
+    \strng{fullhash}{WALPMD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2011}
+    \field{labeldatesource}{}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{The economic value of shale natural gas in Ohio}
+    \field{journaltitle}{Swank program in rural-urban policy summary and report}
+    \field{year}{2011}
+  \endentry
+\enddatalist
+\endinput
