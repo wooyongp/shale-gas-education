@@ -150,6 +150,7 @@ panel <- panel[, .(
       avg_FTOTINC = weighted.mean(FTOTINC, w = HHWT, na.rm = TRUE),
       avg_school_years = weighted.mean(school_years, w = PERWT, na.rm = TRUE),
       total_pop = sum(PERWT, na.rm = TRUE),
+      total_pop_young_adults = sum(fifelse(AGE >=18 & AGE <25, PERWT, 0), na.rm = TRUE),
       avg_nchild = weighted.mean(NCHILD, w = PERWT, na.rm = TRUE),
       oil_and_gas_industry_share = weighted.mean(oil_and_gas_industry, w = PERWT, na.rm = TRUE)
     ), by = .(YEAR, treat_year_CSDID, treated, STATEFIP, PUMA, W)]
