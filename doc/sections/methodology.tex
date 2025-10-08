@@ -1,0 +1,53 @@
+\section{Methodology}
+\label{sec:methodology}
+
+
+\subsection{Data}
+\label{subsec:data}
+The data we use is yearly ACS data from 2002 to 2010, inclusively.
+Our analysis focuses on 47 states including the District of Columbia, excluding Alaska, Hawaii, Puerto Rico, and other two states
+whose shale activities are considered prominent but yet the boom has not started between 
+the period of interest: Wyoming and Colorado.
+
+For the household incomes, we do not exclude any observations in the states of interest unless the income information is missing;
+however, for educational outcomes, we focus on three different age groups -  5-10(elementary), 16-18(high school), and 18-24(college), inclusively - and exclude others.
+The summary statistics of the data based on these income groups are presented in Table \ref{tab:sum_stat}.
+
+
+
+
+\subsection{Difference-in-Differences (DiD)}
+\label{subsec:did}
+
+To estimate the impact of the shale gas boom on state-level income, education, and inequality, we use a difference-in-differences approach under a staggered adoption design.
+As listed in table \ref{tab:shale-gas-extraction}, the shale gas boom began in different states at different times, 
+allowing us to compare the changes in outcomes between states that experienced the boom and those that did not.
+
+In such staggered settings, multiple studies have reported that standard two-way fixed effects (TWFE) estimators lead to biased estimates of the ATT, 
+particularly when the treatment effect varies over time or across groups (\cite{de2020two}, \cite{goodman2021difference}, \cite{roth2023s}).
+
+To address the issue of heterogeneous treatment effects in the staggered designs, we report the Sun and Abraham DiD estimates (\cite{sun_estimating_2021}, SADiD henceforth) for a collective study of all states with shale booms, 
+along with synthetic control (\cite{abadie2010synthetic}) results on Texas.\footnote{Note that SCM is not applicable to staggered designs with multiple treated groups in principle. A matrix completion method that nests SCM is proposed by \textcite{athey2021matrix}, which we do not use in this paper.}
+The justification of using both DiD and SCM in causal panel data models is that they differ in how they handle the dynamic treatment effects over the length of treatment exposure.
+\textcite{athey2021matrix} shows that whereas DiD estimators can be interpreted as modeling counterfactual outcomes with rank-2 matrix factorization 
+that enables more flexibility of counterfactual prediction, SCM can be interpreted as an interpolation method that uses a weighted average of the control units to construct the counterfactual outcome where
+the rank of the counterfactual outcome matrix is equal to the size of the donor pool subtracted by one.
+In a nutshell, DiD estimators are more flexible in modeling the treatment effects over time, whereas SCM is less flexible but also less vulnerable to spurious extrapolation of the counterfactuals; 
+using both methods allows us to cross-validate the results and ensure the robustness of our findings.
+
+\subsection{Synthetic Controls}
+For the synthetic control method, 
+we use Texas as the treated unit and construct the donor pool 
+from 33 states that did not experience the shale gas boom and
+did have sufficient number of observations during the period of interest. 
+To construct the interpolation weights, we use the pre-treatment data of
+each state's race composition, population, and minor ratio(i.e., the ratio of individuals aged 0-17 to the total population)
+from 2000 to 2005, inclusively.
+We divide the sample into male and female and run SCM separately to check whether there exists heterogeneity with respect to sex in the outcomes.
+
+
+% \subsection{Instrumental Variable (IV) Approach}
+% \label{subsec:iv}
+
+% To further extend our analysis of shale gas boom's impact, we employ the boom as an instrument for regional incomme among 
+% workers in the oil and gas industry.

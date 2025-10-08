@@ -1,0 +1,290 @@
+
+
+\section{Tables}
+\label{sec:tables}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{c| c}
+        
+        Year & State \\
+        \hline \hline
+        2005 & Texas \\
+        2006 & Arkansas \\
+        2006 & Oklahoma \\
+        2008 & Alabama \\
+        2008 & Louisiana \\
+        2008 & Pennsylvania \\
+        2008 & West Virginia \\
+    \end{tabular}
+    \caption{Shale Gas Extraction Beginnings by State}
+    \label{tab:shale-gas-extraction}
+\end{table}
+
+
+\input{table/summary_stat_tiny.tex}
+
+\newpage
+\section{Figures}
+
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.4\textwidth]{figures/did-base/fig1.png}
+%     \caption{Impact of Shale Gas Boom on Average Schooling Years}
+%     \label{fig:did-base-fig1}
+%     \begin{minipage}{10cm}
+%     \scriptsize
+%     Notes:
+%     \end{minipage}
+% \end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/gini.png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Gini Coefficient by Treatment Status}
+    \label{fig:gini}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The Gini coefficient is computed within the ACS yearly data for each state, based on individual yearly income. 
+    Individuals without income infomrmation or with negative net income are excluded from the calculation, and the Gini coefficient in the figure 
+    is normalized to the 2005 level of each respective group.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth, height=8.5cm]{figures/did-base/sadid(logFTOTINC).png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: Overall Household Income}
+    \label{fig:Overall Income}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the event study results of the household income based on SA-DiD. 
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage change in household income with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/did-base/sadid(logFTOTINC - by income quartile).png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: Household Income by Quartile}
+    \label{fig:Income by Quartile}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the event study results of the household income by income quartile based on SA-DiD. 
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage change in household income with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    Also, note that the cutoffs for income quartiles are nation-level quartiles adjusted by the sampling weights and is fluctuant across years.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth, height=8.5cm]{figures/did-base/sadid(college enrollment).png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: Overall College Enrollment}
+    \label{fig:college shares}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the event study results of the college enrollment among individuals between age 18 and 24 (inclusive) based on SA-DiD. 
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage point change in college enrollment status with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth, height=8.5cm]{figures/did-base/sadid(college enrollment - controls).png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: Overall College Enrollment (with Controls)}
+    \label{fig:college shares-controls}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the event study results of the college enrollment among individuals between age 18 and 24 (inclusive) based on SA-DiD with covariates. 
+    Covariates include sex, race, and household income of the individual.
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage point change in college enrollment status with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/did-base/sadid(college share - by income quartile).png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: College Enrollment by Household Income Quartile}
+    \label{fig:college enrollment}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the event study results of the college enrollment among individuals between age 18 and 24 (inclusive) by family income quartile based on SA-DiD. 
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage point change in college enrollment status with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    Also, note that the cutoffs for income quartiles are nation-level quartiles adjusted by the sampling weights and is fluctuant across years.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/scm/fig3_v4.png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{SCM Male Education}
+    \label{fig:SCM male}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the synthetic control estimates of the college enrollment shares among
+    males between age 18 and 24 (inclusive) in Texas, where the solid line represents Texas (the treated unit), and the dashed line corresponds to the synthetic control group.
+    The weights for the synthetic control group are based on race composition, minor ratio (i.e., the ratio of individuals aged 0-17 to the total population), and population size
+    in the pre-treatment period, which is defined as 2000 to 2005,
+    inclusively.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/scm/fig3-mspe_v4.png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{SCM Male Education MSPE}
+    \label{fig:SCM male MSPE}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the post-treatment to pre-treatment mean squared prediction error (MSPE) ratio.
+    The x-axis represents the MSPE ratio, and the y-axis represents the  frequency of the MSPE ratio.
+    In the figure, the grey bar represents the MSPE ratio of Texas, and the black bars are MSPE ratios from having other states as placebo treated units.
+    One can readily notice that the MSPE ratio of Texas is located at the left side of the distribution,
+    implying that the actual post-treatment outcomes are predicted well by the synthetic control group;
+    thus, the difference in college enrollment shares between Texas and its synthetic counterpart is not 
+    unusually large relative to the placebo units whose MSPE ratios are shown in the same plot.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/scm/fig4_v4.png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{SCM Female Education}
+    \label{fig:SCM female}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the synthetic control estimates of the college enrollment shares among
+    females between age 18 and 24 (inclusive) in Texas, where the solid line represents Texas (the treated unit), and the dashed line corresponds to the synthetic control group.
+    The weights for the synthetic control group are based on race composition, minor ratio (i.e., the ratio of individuals aged 0-17 to the total population), and population size
+    in the pre-treatment period, which is defined as 2000 to 2005,
+    inclusively.
+    \end{minipage}
+\end{figure}
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.7\textwidth]{figures/scm/fig4-mspe_v4.png}
+%     \captionsetup{width=0.7\textwidth}
+%     \caption{SCM Female Education MSPE}
+%     \label{fig:SCM female MSPE}
+%     \begin{minipage}{0.7\textwidth}
+%     \scriptsize
+%     Notes:
+%     \end{minipage}
+% \end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth, height=8.5cm]{figures/did-base/sadid(high school attendance).png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: High School Attendance}
+    \label{fig:high school shares}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the event study results of the high school attendance among individuals between age 16 and 18 (inclusive) based on SA-DiD. 
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage point change in college enrollment status with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/did-base/sadid(high school attendance- by income quartile).png}
+     \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: High School Attendance by Household Income Quartile}
+    \label{fig:high school shares - by quartile}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the event study results of the high school attendance among individuals between age 16 and 18 (inclusive) by family income quartile based on SA-DiD. 
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage point change in college enrollment status with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    Also, note that the cutoffs for income quartiles are nation-level quartiles adjusted by the sampling weights and is fluctuant across years.
+    \end{minipage}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth, height=8.5cm]{figures/did-base/sadid(young school attendance).png}
+     \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: Elementary School Attendance}
+    \label{fig:elementary school shares}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+     Notes: The figure shows the event study results of the elementary school attendance among individuals between age 5 and 10 (inclusive) based on SA-DiD. 
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage point change in college enrollment status with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/did-base/sadid(young school attendance - by income quartile).png}
+     \captionsetup{width=0.7\textwidth}
+    \caption{Event Study: Elementary School Attendance by Household Income Quartile}
+    \label{fig:elementary school shares - by quartile}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure shows the event study results of the elementary school attendance among individuals between age 5 and 10 (inclusive) by family income quartile based on SA-DiD. 
+    The base period is set to the year before the shale boom started in each state.
+    The point estimates can be interpreted as the percentage point change in college enrollment status with respect to the treatment (i.e., the shale boom).
+    Standard errors are clustered at the state level and the confidence intervals shown are 95\% confidence intervals.
+    Also, note that the cutoffs for income quartiles are nation-level quartiles adjusted by the sampling weights and is fluctuant across years.
+    \end{minipage}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/pop_ratio_from_outside.png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Population Ratio of Migrants from Outside Shale States}
+    \label{fig:migration_share}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure displays the population ratio of individuals who
+    moved from outside the shale states to inside the shale states within a year.
+    The population ratio is calculated as the (weighted) number of individuals who moved from outside the shale states to inside the shale states divided by the total population of the shale states.
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/pop_ratio_from_outside - by income quartile.png}
+    \captionsetup{width=0.7\textwidth}
+    \caption{Normalized Population Ratio of Migrants from Outside Shale State by Personal Income Quartile(North Dakota and Oklahoma)}
+    \label{fig:migration_share-by quartile}
+    \begin{minipage}{0.7\textwidth}
+    \scriptsize
+    Notes: The figure displays the normalized population ratio of individuals who
+    moved from outside the shale states to inside the shale states within a year.
+    The normalization is done by dividing the population ratio of each income quartile group by the population ratio in the 
+    year of shale boom start in each state (e.g., 2005 for Texas) – which helps focus on the relative changes in the population ratio of each income quartile group.
+    Note that these income quartiles are based on personal income, not household income, and are adjusted by the sampling weights.
+    The raw population ratio before normalization is calculated as the (weighted) number of individuals who moved from outside the shale states to inside the shale states divided by the total population of the shale states.
+    \end{minipage}
+\end{figure}

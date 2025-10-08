@@ -1,0 +1,120 @@
+
+\title{Dutch Disease or Dutch Blessing?\\ Shale Gas Shock in the United States and its Impact on Education Decision}
+	
+\author{
+	Wooyong Park\thanks{Predoctoral Research Fellow at the Graduate School of Business, Stanford University; E-mail:
+\href{mailto:wooyongp@stanford.edu}{wooyongp@stanford.edu}. I thank Dohyun Choi and Kyungho Kim who participated in the initial period of this research, but parted due to
+	making and following different paths. The usual disclaimer applies.}\\
+	\multicolumn{1}{p{.7\textwidth}}{\centering Stanford Graduate School of Business} 
+	}
+
+
+\date{\today}
+
+\documentclass[12pt]{article}
+
+\usepackage{kotex}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{booktabs}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{comment}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{chngcntr}
+\usepackage{caption}
+\usepackage{hhline}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{placeins}
+
+% Custom Commands
+% \makeatletter
+% \def\thanks#1{\protected@xdef\@thanks{\@thanks
+%         \protect\footnotetext{#1}}}
+% \makeatother
+% Additional packages
+
+\usepackage{rotating}
+\usepackage{multicol}
+
+\hypersetup{
+	colorlinks=true,    
+	citecolor=blue,     
+	filecolor=magenta,   
+	urlcolor=cyan          
+}
+
+\usepackage[backend=biber, style=authoryear, maxcitenames=2, maxbibnames=9]{biblatex}
+\renewbibmacro{in:}{}
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\addbibresource{Bibliography.bib}
+
+\begin{document}
+	
+	\begin{singlespace}
+		\maketitle
+	\end{singlespace}
+	
+	\begin{abstract}	
+		
+		\noindent 
+		\begin{singlespace}
+			This research investigates the impact of the shale gas boom on regional income and education. 
+    As opposed to the common fear of the Dutch Disease that resource booms 
+    extract resources from other sectors and deter education investments,
+    we find that the shale gas boom had a positive impact on overall well-being in the subject regions,
+    particularly on lower income households.
+    Based on a staggered difference-in-differences framework, 
+    we find that the shale gas boom has led to an approximately 4.8\%p increase in personal income and 
+    4.8\%p increase in the college enrollment rate in the households of first quantile income in shale gas boom regions after three years of exposure to shale gas boom.
+    High school attendance also increased by 18\%p, whereas elementary school attendance did not show significant changes.
+    Additional analysis on Texas based on a synthetic control approach displays
+    null effects on high school dropouts,
+    notwithstanding to the fear that the shale gas boom would have encouraged early participation in the labor market.
+    These results buttress our argument that the shale gas boom did not lead to the Dutch Disease in terms of education;
+    rather, it alleviated social$\cdot$economical inequality and further replenished the college education opportunities for lower income households.
+			
+		\end{singlespace}
+		
+		\bigskip
+		\noindent \emph{Keywords:} Resource Curse, Shale Gas Boom, College Education
+		
+		\noindent \emph{JEL classification:} I23, I24, Q33
+		
+
+	\end{abstract}		
+
+
+\newpage
+
+
+\input{sections/introduction.tex}
+
+\input{sections/literature_review.tex}
+
+\input{sections/methodology.tex}
+
+\input{sections/results.tex}
+
+\input{sections/conclusion.tex}
+
+\newpage
+
+
+\printbibliography
+
+
+\appendix
+
+\onecolumn 
+\input{sections/figure_appendix.tex}
+
+\end{document}

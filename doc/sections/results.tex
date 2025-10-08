@@ -1,0 +1,103 @@
+\section{Results}
+\label{sec:results}
+
+
+\subsection{Household Income}
+\textbf{Overall Household Income} \hspace{0.1cm}
+Figure \ref{fig:Overall Income} presents the event study estimates of the dynamic treatment effects.
+These estimates indicate no significant pre-treatment effects which supports the validity of the parallel trends assumption. 
+The dynamic post-treatment effects increase steadily, reaching approximately 3.5\%p by the fourth year.
+This suggests that the shale gas boom had a positive overall impact on household income.
+
+\textbf{Household Income by Quartile} \hspace{0.1cm}
+The heterogeneity in these effects across income quartiles is illustrated in figure \ref{fig:Income by Quartile}.
+Although the positive income effects are observed across all quartiles, the most pronounced effects are concentrated in the lower income quartiles, particularly the first quartile(5.4\% in the fifth year).
+The 2Q–4Q groups exhibit smaller gains ranging from 1.2\% to 3\% by the fifth year,
+indicating that the shale boom disproportionately benefited lower-income households.
+
+
+
+\subsection{College Enrollment}
+\textbf{Overall College Enrollment} \hspace{0.1cm}
+Figure \ref{fig:college shares} displays the dynamic effects of the shale boom on the college enrollment rate of 
+individuals aged 18 to 24, inclusively.
+By the third year after the boom, the estimated effect reaches approximately 7.5\%p and rises to about 12\%p by the fifth year.
+These findings indicate that improved local economic conditions and increased household income may have encouraged greater educational investment.
+
+Acknowledging the pre-treatment downward trend, however, one must note that ``unconditional'' parallel trends 
+might not hold true in this case. To address this, we add results with controls – sex, race, and household income – in figure \ref{fig:college shares-controls},
+where the pre-treatment estimates are no longer statistically significant execept for the first year(year -6).
+In this case, the post-treatment estimates are still similar to those in figure \ref{fig:college shares}, suggesting the robustness of the results to the inclusion of controls.
+
+\textbf{College Enrollment by Quartile} \hspace{0.1cm}
+In figure \ref{fig:college enrollment}, households in the bottom income quartile (1Q) exhibit larger post-treatment increase in college enrollment than other quartiles. 
+By the third year, the estimates suggest an increase of 4.5\%p and peaks at around 7\%p by the fifth year.
+In contrast, the 2Q–4Q groups show no such increase in college share; rather, the 2Q and 4Q groups show a slight decrease in college enrollment by approximately 2$\sim$3\%p in the fourth and fifth years.
+This heterogeneity suggests that the shale boom functioned as a “Dutch Blessing,” enhancing both income and educational outcomes for low-income households, contradicting the traditional Dutch Disease narrative that resource booms deter education investments.
+
+
+\textbf{College Enrollment by Sex with SCM} \hspace{0.1cm}
+For the same age group (18–24), we use SCM to estimate the effect of the shale boom on college enrollment shares by sex.
+To improve the quality of the pre-treatment fit, we include data from 2000 and 2001 in the analysis.
+Figure \ref{fig:SCM male} presents the results for males, where the solid line represents Texas (the treated unit), and the dashed line corresponds to the synthetic control group. 
+The pre-treatment trends are closely aligned, indicating that the synthetic control effectively captures the counterfactual trajectory of college enrollment shares in Texas.
+
+Between 2006 and 2008 – coinciding with the early stages of the shale boom – 
+Male College enrollment rate in Texas slightly decreasd relative to the synthetic control group.
+This pattern may reflect a behavioral response in which some young males opted out of college to pursue immediate employment opportunities 
+in the expanding shale sector.
+However, this observed divergence does not withstand the MSPE ratio test(figure \ref{fig:SCM male MSPE}),
+which suggests that the difference in college enrollment shares between Texas and its synthetic counterpart is not unusually large relative to placebo units.
+Therefore, the decline in male college enrollment shares during 2006–2008 cannot be confidently attributed to the shale gas boom.
+
+Figure \ref{fig:SCM female} reports the corresponding estimates for females. 
+The college enrollment trajectories of Texas and its synthetic counterpart are highly similar throughout the entire study period, suggesting minimal, if any, impact of the shale boom on educational decisions among women. 
+This may be due to women being less directly exposed to the employment opportunities in the shale industry, resulting in weaker incentives to alter their educational trajectories. 
+% Consistent with the findings for males, the MSPE ratio test shown in figure~\ref{fig:SCM female MSPE} places Texas on the left side of the placebo distribution, confirming that the estimated differences are not statistically significant.
+
+\textbf{Other Educational Outcomes} \hspace{0.1cm} 
+We also report the estimates of the shale boom's impact on two other educational outcomes: high school and elementary school attendance rates.
+For high school attendance, the estimates in figure \ref{fig:high school shares} show negative or null post-treatment effects, and the pre-treatment estimates are statistically significant and upward sloping.
+However, if we control for household income quartiles as in figure \ref{fig:high school shares - by quartile}, the pre-treatment estimates become statistically insignificant, 
+and the post-treatment estimates show a positive increase of approximately 18\%p in the third year after the treatment.
+However, the estimates for third and fourth quartiles are negative($-0.8\sim -1.2$\%p) and statistically significant, suggesting that the shale boom may have discouraged high school attendance among higher-income households.
+\\
+\indent In figures \ref{fig:elementary school shares} and \ref{fig:elementary school shares - by quartile}, 
+we present the estimates for elementary school attendance rates.
+In both figures, we do not observe any significant treatment effects, except for the occasional negative estimates in the second and third income quartiles.
+Thus, the shale boom does not appear to have had a significant impact on elementary school attendance rates in general, 
+which might reflect the fact that primary education is compulsory in the U.S. and thus less sensitive to economic fluctuations compared to higher education.
+
+\textbf{Mechanisms: The “Dutch Blessing”} \hspace{0.1cm}
+The shale boom created substantial employment opportunities for low-skilled workers and disproportionately benefited low-income households who were more likely to be affected by the increased opportunities. 
+Higher local tax revenues enabled greater public investment in education and community infrastructure which improved access to schools and support services.
+Beyond public funding, shale gas companies also supported local development through community funds and corporate initiatives such as scholarship programs.
+At the household level, rising incomes eased liquidity constraints for families that had previously been credit-constrained.
+This likely allowed for increased investment in children's education. The boom may also have reshaped expectations about the long-term returns to education, especially in communities that viewed the economic shock as a long-term improvement in local prospects.
+Together, these factors help explain what we describe as a “Dutch Blessing”: a resource-driven boom that improved both income and educational outcomes among low-income households rather than discouraging human capital accumulation.
+
+\subsection{Potential Violations of the Identification Assumptions}
+\label{subsec:assumptions}
+
+\textbf{Parallel Trends and Anticipatory Effects} \hspace{0.1cm} In most of our results, we do not find significant pretrends, which supports the parallel trends assumption.
+Also, DiD estimates are robust to anticipatory effects as well: it is unlikely that households in shale states anticipated the shale boom and adjusted their educational and economic decisions before the treatment.
+However, in some outcomes, such as household income by quartiles and overall college enrollment, we do find some clues of pretrends(figure \ref{fig:Income by Quartile} and \ref{fig:college shares}).
+In figure \ref{fig:Income by Quartile}, although the estimates is not statistically significant, there exists a slight upward trend in the first quartile before the treatment.
+However, we maintain that the upward trend after the treatment is significantly larger in scale and steeper than the pre-treatment trend, which suggests that the shale gas boom did have a positive impact on the 1Q household income even if 
+the point estimates themselves are slightly upward biased.
+In figure \ref{fig:college shares}, 
+the pre-treatment estimates are both statistically significant and downward sloping. 
+When family income is controlled as in figures \ref{fig:college shares-controls} and \ref{fig:college enrollment}, however, such pretrends disappear. 
+This suggests that although the potential outcomes do not follow parallel trends unconditionally, once the income is controlled for, the parallel trends assumption holds (i.e., conditional parallel trends).
+
+\textbf{Compositional Changes} \hspace{0.1cm}
+Another potential concern in DiD estimates is that we cannot rule out the possibility of compositional changes in the treatment and control groups in cross-sectional data like the ACS.
+Cases of compositional changes that may bias our estimates include, for example, the migration of low-income households in the states without shale gas to states with shale booms.
+- This is a concern because, if the migration is selective, households more eager to invest in education may be more likely to move to states with shale booms, which would bias the DiD estimates upward.
+- Admittedly, we do not have a direct way to test for such compositional changes and consequent bias in the data.
+However, indirect evidence suggests that such compositional changes are unlikely to have occurred.
+Figure \ref{fig:migration_share} shows the share of migrants from non-shale states to shale states from 2002 to 2010 by each shale states.
+In most of these states, the ratio of migrants from non-shale states to the total population did not grow after the shale boom.
+Only two of them, North Dakota and Oklahoma, show a significant increase in the share of migrants from non-shale states after the boom.
+However, if the compositional changes truly drived an upward bias in the DiD estimates, we would likely see a larger increase in the share of non-shale-to-shale migrants in the lower income quartiles than in the higher income quartiles.
+Since such a pattern is not observed in figure \ref{fig:migration_share-by quartile}, we maintain that the compositional changes are unlikely to have significantly biased our estimates.

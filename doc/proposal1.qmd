@@ -1,0 +1,185 @@
+---
+title: "Proposal V1 -  Shale Gas Shock"
+author: "Wooyong Park"
+date: today
+format: PrettyPDF-pdf
+---
+
+
+# Research Questions
+
+- How did shale gas shock affect education, income, and other living standards (was there a dutch disease)
+
+
+# Methodologies
+
+## Notes
+
+ - For education, I included age 18-25 individuals to the sample
+ - For income, I included age 18-40 individuals to the sample
+
+## Synthetic Control
+
+ - Control variables for donor pool: `predictors = c("white_ratio", "black_ratio", "asian_ratio", "hispanic_ratio",  "youth_ratio","population")`
+
+### Trial (1)
+First, I tried SCM with Texas as the treatment group.
+Without consideration of other shale-gas states like Oklahoma or Penn, I had the following results.
+
+**Education**
+
+:::: {layout="[ 50, 50 ]"}
+
+::: {#scm-male-edu}
+
+![scm-male-edu](figures/scm/fig5.png)
+
+:::
+
+::: {#scm-female-edu}
+![scm-female-edu](figures/scm/fig6.png)
+:::
+
+::::
+
+- In both genders, we find a slight decrease in the avg. years of education, but in a very modest degree.
+
+
+**Income**
+
+:::: {layout="[ 50, 50 ]"}
+
+::: {#scm-male-income}
+
+![scm-male-income](figures/scm/fig1.png)
+:::
+
+::: {#scm-female-income}
+![scm-female-income](figures/scm/fig2.png)
+:::
+
+::::
+
+- In both genders, we find a slight increase in the avg. income, but in a very modest degree.
+
+
+
+### Problems with Trial (1)
+
+1. Placebo test results are so bad. For example, in education,
+
+
+:::: {layout="[ 50, 50 ]"}
+
+::: {#scm-male-edu-placebo}
+
+![scm-male-edu-placebo](figures/scm/fig5-placebo.png)
+
+:::
+
+::: {#scm-female-edu-placebo}
+![scm-female-edu-placebo](figures/scm/fig6-placebo.png)
+:::
+
+::::
+
+
+:::: {layout="[ 50, 50 ]"}
+
+::: {#scm-male-edu-mspe}
+
+![scm-male-edu-mspe](figures/scm/fig5-mspe.png)
+
+:::
+
+::: {#scm-female-edu-placebo}
+![scm-female-edu-mspe](figures/scm/fig6-mspe.png)
+:::
+
+::::
+
+- Note: A good MSPE test result should have the treated (gray) column on the far right.
+
+2. I didn't account for other states with shale gas activity.
+
+
+### Trial (2)
+
+In trial (2), I excluded other states with shale-gas activity.
+
+Results are unsatisfactory:
+
+- Even the slightest amount of different trends between SC and treated disappeared
+- Placebo tests are not working well.
+
+For example, the average income effect is as follows:
+
+:::: {layout="[ 50, 50 ]"}
+
+::: {#scm-income-trial2}
+
+![scm-overall-income(trial 2)](figures/scm/fig0_v2.png)
+
+:::
+
+::: {#scm-income-trial2-placebo}
+![scm-overall-income_placebo(trial 2)](figures/scm/fig0-placebo_v2.png)
+:::
+
+::::
+
+
+## DID
+
+Although I did not have a straight DID now, I made plots equivalent to DID analyses.
+
+This looks a bit more satisfying:
+
+
+### Overall Effect
+
+::: {layout="[ 50, 50 ]"}
+
+::: {#did-schlyears}
+
+![did-schlyears](figures/did-base/fig2.png)
+
+:::
+
+::: {#did-income}
+![did-income](figures/did-base/fig4.png)
+:::
+
+::::
+
+### By sex
+::: {layout="[ 50, 50 ]"}
+
+::: {#did-schlyears-by_sex}
+
+![did-schlyears-by_sex](figures/did-base/fig1.png)
+
+:::
+
+::: {#did-income-by_sex}
+![did-income-by_sex](figures/did-base/fig3.png)
+:::
+
+::::
+
+# To-dos
+
+ - Formally rerun DID
+ - Search for any individual-level panel data with **state**, **year(2000-2010)**, **sex**, **age** information. It'd be better if it includes **education**, **income**, **labor market participation**.
+ - Extend our question: 
+    + Heterogeneous Effects on men and women? Why? For example, male income decreased in nonshale states.
+    + What are the channels of the income/education effects?
+    + Why did SCM do bad but DID do great? Econometric and causal inference-based answers
+
+# Code Directory
+- Synthetic control: 
+    + trial (1) : final-project/code/scm.r
+    + trial (2) : final-project/code/scm-2.R
+
+- DID: final-project/code/did-with-panel.r
+

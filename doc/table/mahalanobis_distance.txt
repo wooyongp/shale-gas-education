@@ -1,0 +1,21 @@
+% latex table generated in R 4.4.3 by xtable 1.8-4 package
+% Wed May 28 21:06:18 2025
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlr}
+  \hline
+ & statefip & mahalanobis \\ 
+  \hline
+1 & treated & Inf \\ 
+  2 & 11 & 5.42 \\ 
+  3 & 6 & 5.08 \\ 
+  4 & 35 & 4.66 \\ 
+  5 & 33 & 4.51 \\ 
+  6 & 9 & 3.82 \\ 
+  7 & 50 & 3.66 \\ 
+  8 & 13 & 3.57 \\ 
+  9 & 31 & 3.49 \\ 
+  10 & 25 & 3.46 \\ 
+   \hline
+\end{tabular}
+\end{table}

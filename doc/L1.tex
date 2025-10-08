@@ -1,0 +1,456 @@
+%----------------------------------------------------------------------------------------
+%    PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{SimpleDarkBlue}
+\usepackage{multirow, multicol}
+\usepackage{hyperref}
+\usepackage{graphicx} % Allows including images
+\usepackage{caption}
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{amsmath}
+\usepackage[backend=bibtex, style=authoryear]{biblatex}
+\addbibresource{Bibliography.bib}
+\newcommand{\bigCI}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp$}}}}
+\newenvironment{wideitemize}{\itemize\addtolength{\itemsep}{10pt}}{\enditemize}
+
+%----------------------------------------------------------------------------------------
+%    TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{Dutch Disease or Dutch Blessing?}
+\subtitle{Shale Gas Shock in the United States and its Impact on Education}
+\author{Wooyong Park, Dohyun Choi, and Kyungho Kim}
+
+\institute
+{\\
+    GitHub Repo: \url{https://github.com/wooyongp/shale-gas-education}
+}
+
+\date{\today} % Date, can be changed to a custom date
+
+%----------------------------------------------------------------------------------------
+%    PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\begin{frame}
+    % Print the title page as the first slide
+    \titlepage
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Is the Shale Gas Boom a Blessing or a Curse?}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/dutch-disease.png}
+    % \caption{Figure from ISL-Python}
+\end{figure}
+\end{column}
+\begin{column}{0.4\textwidth}
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/example.jpg}
+    % \caption{Figure from ISL-Python}
+\end{figure}  
+\end{column}
+    \end{columns}
+
+\begin{itemize}
+    \item \textbf{Dutch Disease} refers to negative economic effects that can follow a resource boom or discovery
+    \item When resource industries grow quickly, they create many well-paying jobs that don’t require much education
+    \item As a result, young people may choose to work instead of staying in school leading to lower educational attainment
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+% \begin{frame}{Distributional Effects: Dutch Blessing?}
+
+% \textbf{Research Questions}
+
+% \begin{itemize}
+%     \item Did the Shale boom really undermine local educational attainment?
+%     \item Was the effect uniform across different income groups?
+% \end{itemize}
+
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics[width=0.6\textwidth]{figures/gini.png}
+%   \caption{Gini Index Before and After the Shale Gas Shock}
+%   \label{fig:gini}
+% \end{figure}
+% \end{frame}
+%------------------------------------------------
+\begin{frame}{Causal Identification via DAG}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Causal Relations}
+    \begin{itemize}
+        \item Shale Gas Boom $\to$ Income
+        \item Shale Gas Boom $\to$ Education
+        \item HTE by Income Quartiles
+    \end{itemize}
+
+    \hspace{12pt}
+
+\textbf{Policy Implications}
+\begin{itemize}
+    \item How can we ensure that the benefits / burdens of resource booms are equitably distributed?
+    \item Should the government intervene to mitigate the negative effects of resource booms?
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/DAG.png}
+%   \caption{DAG}
+  \label{fig:DAG}
+\end{figure}
+\end{column}
+\end{columns}
+
+\end{frame}
+%------------------------------------------------
+% 3. Literature Review
+\begin{frame}{Literature Review}
+\begin{itemize}
+    \item Positive Effects of Shale Gas Shock \textbf{on Income}
+    \begin{itemize}
+        \item Higher per capita income in shale counties(\cite{weinstein2011economic})
+    \end{itemize}
+    
+    \item Negative Effects of Shale Gas Shock \textbf{on Education}
+    \begin{itemize}
+        \item Decline in high school and college attainment in West Virginia, Montana, and North Dakota(\cite{rickman2017shale})
+        \item Increased dropout rates among immigrants in Texas(\cite{carpenter2019texas})
+    \end{itemize}
+    
+    \item Limitations in Prior Studies and our Contribution
+    \begin{itemize}
+        \item No discussions of \textbf{heterogeneous treatment effects}
+        \item Identified positive education effects among \textbf{low-income households}.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{IPUMS ACS Data}
+    \footnotesize
+    \begin{itemize}
+        \item IPUMS ACS - 1yr from 2002 to 2010
+        \item Variables of Interest : Household Income, Education Attainment, School Attendance, etc.
+        \item Covariates are mostly balanced, excluded five states {\tiny  (Hawaii, Alaska, Puerto Rico, Colorado, and Wyoming)}
+    \end{itemize}
+\input{table/summary_stat_tiny.tex}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Methodology - (1) \textcite{sun_estimating_2021} DiD}
+\only<1>{
+    Staggered treatment is a policy design where different groups have different implementation/dropout dates.
+    \begin{columns}
+    \column{0.5\linewidth}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+             &$t_1$&$t_2$&$t_3$&$t_4$&$t_5$  \\ \hline
+             $g_1$&x&x&x&x&x  \\ \hline
+             $g_2$&x&x&x&x&x  \\ \hline
+             $g_3$&x&x&x&x&x  \\ \hline
+             $g_4$&x&x&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}  \\ \hline
+             $g_5$&x&x&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}  \\ \hline
+        \end{tabular}
+        \caption{Cannonical DiD}
+        % \label{tab:my_label}
+    \end{table}
+    \column{0.5\linewidth}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+             &$t_1$&$t_2$&$t_3$&$t_4$&$t_5$  \\ \hline
+             $g_1$&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}  \\ \hline
+             $g_2$&x&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}  \\ \hline
+             $g_3$&x&x&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o} \\ \hline
+             $g_4$&x&x&x&\textcolor{red!60}{o}&\textcolor{red!60}{o}  \\ \hline
+             $g_5$&x&x&x&x&\textcolor{red!60}{o}  \\ \hline
+             $g_\infty$&x&x&x&x&x  \\ \hline
+        \end{tabular}
+        \caption{Staggered Adoption}
+        % \label{tab:my_label}
+    \end{table}
+\end{columns}
+}
+
+\only<2>{
+In our case of shale gas boom, the treatment assignment is staggered across states.
+    \begin{columns}
+    \column{0.47\linewidth}
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{c| c}
+        
+        Year & State \\
+        \hline \hline
+        2005 & Texas \\
+        2006 & Arkansas \\
+        2006 & Oklahoma \\
+        2008 & Alabama \\
+        2008 & Louisiana \\
+        2008 & Pennsylvania \\
+        2008 & West Virginia \\
+    \end{tabular}
+    \caption{Shale Gas Extraction Beginnings by State}
+    \label{tab:shale-gas-extraction}
+\end{table}
+    \column{0.06\linewidth}
+    \centering
+    \Huge
+    =
+    \column{0.47\linewidth}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+             &$t_1$&$t_2$&$t_3$&$t_4$&$t_5$  \\ \hline
+             $g_1$&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}  \\ \hline
+             $g_2$&x&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o}  \\ \hline
+             $g_3$&x&x&\textcolor{red!60}{o}&\textcolor{red!60}{o}&\textcolor{red!60}{o} \\ \hline
+             $g_4$&x&x&x&\textcolor{red!60}{o}&\textcolor{red!60}{o}  \\ \hline
+             $g_5$&x&x&x&x&\textcolor{red!60}{o}  \\ \hline
+             $g_\infty$&x&x&x&x&x  \\ \hline
+        \end{tabular}
+        \caption{Staggered Adoption}
+        % \label{tab:my_label}
+    \end{table}
+\end{columns}
+}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Methodology - (1) \textcite{sun_estimating_2021} DiD}
+    \begin{wideitemize}
+        \item In canoncial DiD, we often employ two-way fixed effects (TWFE) where $\beta$ captures the ATT:
+        \begin{itemize}
+            \item $Y_{i,g,t} = \beta\cdot D_{i,g,t} + \delta_t + \delta_g  + \varepsilon_{i,g,t}$
+            \item $\delta_t, \delta_g$: time and group fixed effects
+            \item $D_{i,g,t}$: the treatment indicator for individual $i$ in group $g$ at time $t$
+        \end{itemize}
+        \item Multiple studies have shown that TWFE can be a biased estimator of ATT in staggered designs{\scriptsize(\cite{goodman2021difference}, \cite{de2020two})}
+        \item Alternative approaches: \textcite{sun_estimating_2021}, \textcite{callaway2021difference}, \textcite{borusyak2024revisiting}, \textcite{athey2021matrix}
+    \end{wideitemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Methodology - (2) Synthetic Controls}
+\begin{wideitemize}
+    \item Constructions of SCM
+    \begin{itemize}
+        \item Treatment Group: Texas
+        \item Donor Pool: Every other state in the US mainland except shale gas boom states(á la \cite{cunningham2019})
+    \end{itemize}
+    \item Why did we use both DiD and SCM?
+    \begin{itemize}
+        \item \textcite{athey2021matrix} shows that DiD and SCM can be interpreted as different matrix factorization methods.
+        \item DiD is more flexible in modeling the counterfactuals($Y_{treated}(0)$).
+        \item SCM is less flexible but less vulnerable to spurious extrapolation of the counterfactuals.
+    \end{itemize}
+\end{wideitemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Assumptions for Causal identification}
+\begin{wideitemize}
+    \item \textcite{sun_estimating_2021} DiD
+    \begin{itemize}
+        \item \textbf{Parallel Trends}: The treated and control groups would have followed the same trend in the absence of treatment
+        \item \textbf{No Compositional Changes}: The composition of the treated and control groups remains constant over time
+        % \item \textbf{Homogeneity of Dynamic Treatment Effects}: The dynamic evolution of treatment effect is the same across different shale states
+    \end{itemize}
+    \item Synthetic Control Method
+    \begin{itemize}
+        \item The treated group (Texas) is a linear interpolation of the control group (donor pool)
+    \end{itemize}
+\end{wideitemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Main Result: Income}
+\vfill
+    \begin{itemize}
+        \item Household income increased by 2.5\% overall in the third year after the shale boom.
+        \item In 1Q, the increase was 18\%; in 2Q, it was 5\%; in 3-4Q, it was not statistically significant.
+    \end{itemize}
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, height=4cm]{figures/did-base/sadid(logFTOTINC).png}
+        \caption{Overall Income}
+        \label{fig:Overall Income}
+    \end{minipage}
+ \hfill
+    \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, height=4cm]{figures/did-base/sadid(logINCTOT - by income quartile).png}
+    \caption{Income by Quartile}
+    \label{fig:Income by Quartile}
+    \end{minipage}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Main Result: Education}
+    \vfill
+    \begin{itemize}
+        \item College enrollment increased by 7.5\%p overall in the third year after the shale boom.
+        \item The increase was mainly driven by the 1Q households.
+        \item Drawback: Violation in the parallel trend assumptions in the left figure
+    \end{itemize}
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/did-base/sadid(college enrollment).png}
+        \caption{College Enrollment}
+        \label{fig:college enrollment}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/did-base/sadid(college share - by income quartile).png}
+        \caption{College Share by Income Quartile}
+        \label{fig:college shares}
+    \end{minipage}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{SCM College Shares (Age 18-24)}
+    \vfill
+    \begin{itemize}
+        \item included 2000 and 2001 to increase the pre-treatment fit
+        \item Separate analysis for male and female college shares
+        \item A slight drop in college shares in 2006-2008 for males
+    \end{itemize}
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.44\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth, height=5cm]{figures/scm/fig3_v4.png}
+        \caption{SCM Male Education}
+        \label{fig:SCM male}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.44\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth, height=5cm]{figures/scm/fig4_v4.png}
+        \caption{SCM Female Education}
+        \label{fig:SCM female}
+    \end{minipage}%
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Robustness Check for SCM}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.44\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth, height=5cm]{figures/scm/fig3-mspe_v4.png}
+        \caption{SCM Male Education}
+        \label{fig:SCM male}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.44\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth, height=5cm]{figures/scm/fig4-mspe_v4.png}
+        \caption{SCM Female Education}
+        \label{fig:SCM female}
+    \end{minipage}%
+\end{figure}
+    \begin{itemize}
+        \item As supported by the MSPE placebo test results, the slight drops in previous results cannot be attributed to the shale gas boom.
+    \end{itemize}
+\end{frame}
+%------------------------------------------------
+% \begin{frame}{Extensions: Other Educational Outcomes}
+% \begin{figure}[htbp]
+%     \centering
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{figures/did-base/sadid(young school attendance - by income quartile).png}
+%         \caption{Elementary School Attendance by Income Quartile}
+%         \label{fig:young school attendance by income quartile}
+%     \end{minipage}%
+%     \hfill
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{figures/did-base/sadid(high school attendance- by income quartile).png}
+%         \caption{High School Attendance by Income Quartile}
+%         \label{fig:high school attendance by income quartile}
+%     \end{minipage}
+% \end{figure}
+% \end{frame}
+%------------------------------------------------
+\begin{frame}{Validity of the Identification Assumptions}
+\textbf{Parallel Trends}
+\begin{itemize}
+  \item Most outcomes show no significant pre-trends $\Rightarrow$ supports parallel trends assumption.
+  \item Some evidence of pre-trends:
+    \begin{itemize}
+      \item Household income (1Q): slight upward pre-trend, but post-treatment increase is larger and steeper.
+      \item College enrollment: significant pre-trend, but disappears when controlling for income $\Rightarrow$ supports \textit{conditional} parallel trends.
+    \end{itemize}
+  \item Anticipatory behavior unlikely: treatment not anticipated by households.
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Compositional Changes}
+\begin{itemize}
+  \item Concern: selective migration from non-shale to shale states may bias estimates upward.
+  \item Evidence: slight increase in migration rate post-treatment, but unclear if this causes bias.
+\end{itemize}
+
+% \vspace{0.2cm}
+% \textbf{Dynamic Treatment Effect Homogeneity}
+% \begin{itemize}
+%   \item Important assumption for SADiD; discussed further in analysis.
+% \end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Conclusion}
+\begin{wideitemize}
+    \item Shale gas boom increased income and college enrollment especially for low-income households
+    \item Our analysis challenge conventional “Dutch Disease” rather suggesting a “Dutch Blessing” of resource-driven shock
+    \item Limitations
+    \begin{itemize}
+        \item Focused on short- to medium-run effects
+        \item Did not capture spillovers across states 
+        % \item Possible bias from unobserved confounders might still persist
+    \end{itemize}  
+\end{wideitemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}{Future Work}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/DAG.png}
+  \caption{DAG}
+\end{figure}
+
+\begin{itemize}
+    \item Explore long-term effects of the shale gas boom on education and income
+    \item IV-regression using the shale shock as an instrument for income.
+    \begin{itemize}
+        \item we were not able to use SADiD as the first stage because F-test was not satisfied.
+        \item possible to use the shale gas production volumne as an instrument that is more relevant to income.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}{References}
+\tiny
+\printbibliography[heading=none]
+\end{frame}
+
+\end{document}

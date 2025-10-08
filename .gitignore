@@ -1,7 +1,6 @@
 *.parquet
 *.duckdb
 *.Rproj
-doc/
 **/cache
 !doc/*.pdf
 !doc/*.tex
