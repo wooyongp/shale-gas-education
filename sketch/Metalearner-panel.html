@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Wooyong Park">
-<meta name="dcterms.date" content="2025-09-28">
+<meta name="dcterms.date" content="2025-10-07">
 
 <title>Metalearners for Panel Data(Sketch)</title>
 <style>
@@ -93,10 +93,18 @@ window.Quarto = {
    
   <ul>
   <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#notations" id="toc-notations" class="nav-link" data-scroll-target="#notations">Notations</a></li>
   <li><a href="#metalearner" id="toc-metalearner" class="nav-link" data-scroll-target="#metalearner">Metalearner</a>
   <ul class="collapse">
-  <li><a href="#x-learner" id="toc-x-learner" class="nav-link" data-scroll-target="#x-learner">X-Learner</a></li>
-  <li><a href="#r-learner" id="toc-r-learner" class="nav-link" data-scroll-target="#r-learner">R-Learner</a></li>
+  <li><a href="#r-learner" id="toc-r-learner" class="nav-link" data-scroll-target="#r-learner">R-Learner</a>
+  <ul class="collapse">
+  <li><a href="#dgp-for-the-panel-case" id="toc-dgp-for-the-panel-case" class="nav-link" data-scroll-target="#dgp-for-the-panel-case">DGP for the Panel Case</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#staggered-treatment-assumptions" id="toc-staggered-treatment-assumptions" class="nav-link" data-scroll-target="#staggered-treatment-assumptions">Staggered Treatment Assumptions</a></li>
+  <li><a href="#longbet-setup" id="toc-longbet-setup" class="nav-link" data-scroll-target="#longbet-setup">LongBet Setup</a>
+  <ul class="collapse">
+  <li><a href="#treatment-effects" id="toc-treatment-effects" class="nav-link" data-scroll-target="#treatment-effects">Treatment Effects</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -122,7 +130,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 28, 2025</p>
+      <p class="date">October 7, 2025</p>
     </div>
   </div>
   
@@ -136,18 +144,71 @@ window.Quarto = {
 
 <section id="motivation" class="level1">
 <h1>Motivation</h1>
-<p>Currently, the <code>grf</code> package and causal forests do not support panel ata. However, researchers often use panel data to estimate causal effects, and as Athey and Imbens (2016) show, data-driven HTE estimation has much better qualities compared to testing researchers’ pre-defined hypotheses.</p>
+<p>Currently, the <code>grf</code> package and causal forests do not support panel ata. However, researchers often use panel data to estimate causal effects, and as Athey and Imbens (2016) show, data-driven HTE estimation has much better qualities compared to testing researchers’ pre-defined hypotheses. Also, it is well established that R-learners specifically outperform in estimating HTEs nonparametrically(Robinson, 1988; Wager and Athey, 2018; Nie and Wager, 2020).</p>
+</section>
+<section id="notations" class="level1">
+<h1>Notations</h1>
+<ul>
+<li><span class="math inline">Y_{it}</span>: outcome variable for individual <span class="math inline">i</span> in period <span class="math inline">t</span>.</li>
+<li><span class="math inline">D_{it}</span>: treatment indicator for individual <span class="math inline">i</span> in period <span class="math inline">t</span>.</li>
+<li><span class="math inline">E_{i} = \min \{t: D_{it}=1\}</span>: treatment adoption time for individual <span class="math inline">i</span>.</li>
+<li><span class="math inline">X_i</span>: individual-level covariates.</li>
+<li><span class="math inline">S_{it} = t - E_i</span>: time of exposure to the treatment for individual <span class="math inline">i</span> in period <span class="math inline">t</span></li>
+</ul>
 </section>
 <section id="metalearner" class="level1">
 <h1>Metalearner</h1>
-<section id="x-learner" class="level2">
-<h2 class="anchored" data-anchor-id="x-learner">X-Learner</h2>
-</section>
+<p>We want to estimate the following CATT:</p>
+<p><span class="math display">
+CATT(x, s) = \mathbb{E}[Y_{it} | X_i = x, S_{it} = s] - \mathbb{E}[Y_{it} | X_i = x, S_{it} = 0]
+</span></p>
+<p>which would, in some sense, give us event study plots for each <span class="math inline">x</span> value.</p>
 <section id="r-learner" class="level2">
 <h2 class="anchored" data-anchor-id="r-learner">R-Learner</h2>
+<section id="dgp-for-the-panel-case" class="level3">
+<h3 class="anchored" data-anchor-id="dgp-for-the-panel-case">DGP for the Panel Case</h3>
 <p><span class="math display">\begin{align}
-R &amp;= A\tau(X) + g_0(X) + \varepsilon \\
-A &amp;= m_o(X) + \nu
+Y_{it} &amp;= \sum_{s=1}^T \mathbb{I}(S_{it} = s)\tau(X_i,s) + g_0(X_i, \delta_t) + \varepsilon \\
+D_{it} &amp;= m_o(X_i) + \nu
+\end{align}</span></p>
+<p>where <span class="math inline">\varepsilon</span> and <span class="math inline">\nu</span> satisfies <span class="math inline">\mathbb{E}[\varepsilon |D,  X] = 0</span> and <span class="math inline">\mathbb{E}[\nu | X] = 0</span>.</p>
+<p><span class="math inline">(1)</span> implies that for untreated individuals and periods,</p>
+<p><span class="math display">
+Y_{it} - Y_{it'} = g_0(X_i, \delta_t) - g_0(X_i, \delta_t') \qquad \forall t \neq t'
+</span></p>
+<p>i.e., we can allow the trends to vary.</p>
+<p>We can interpret the model as follows:</p>
+<p><span class="math display">\begin{align}
+l_0(X) &amp;:=
+m_o(X) &amp;= \mathbb{E}[D | X] \quad (\text{Propensity Score})
+\end{align}</span></p>
+</section>
+</section>
+</section>
+<section id="staggered-treatment-assumptions" class="level1">
+<h1>Staggered Treatment Assumptions</h1>
+<p>As Sun and Abraham (2020) does, we also need the constant dynamic treatment effect assumption:</p>
+<p><span class="math display">\begin{align}
+E[Y_{i,e+s} - Y_{i, e+s}^\infty \mid E_i = e] = \alpha_s \quad \forall e \in \{1, \ldots, T, \infty\}
+\end{align}</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">E_i = \min \{t: D_{i,t}=1\}</span> is the first period that the individual <span class="math inline">i</span> is treated.</li>
+<li><span class="math inline">D_{i,t}</span> is the treatment indicator for individual <span class="math inline">i</span> in period <span class="math inline">t</span>.</li>
+</ul>
+</section>
+<section id="longbet-setup" class="level1">
+<h1>LongBet Setup</h1>
+<p><span class="math display">\begin{align}
+Y_{it} &amp;= Y_{it}(0) +  \sum_{s=1}^T \mathbb{1}(t = e_i+S)\bigl(Y_{it}(S) - Y(0) \bigr)\\
+Y_{it}(S) &amp;\perp &lt;D_{i1}, D_{i2}, \dots, D_{iT}&gt; | X_i \qquad \forall S=0, 1, \dots T
+\end{align}</span></p>
+<p>We further assume that each individual is iid, and that <strong>overlap</strong> is satisfied.</p>
+<section id="treatment-effects" class="level3">
+<h3 class="anchored" data-anchor-id="treatment-effects">Treatment Effects</h3>
+<p><span class="math display">\begin{align}
+\tau_t(x, S) &amp;:= \mathbb{E}[Y_{it}(S) - Y_{it}(0) | X_i = x, S]\\
+&amp;=\mathbb{E}[Y_{it} | X_i = x, S] - \mathbb{E}[Y_{it} | X_i = x, S=0]
 \end{align}</span></p>
 </section>
 </section>

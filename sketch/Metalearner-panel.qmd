@@ -16,22 +16,53 @@ format:
 
 Currently, the `grf` package and causal forests do not support panel ata.
 However, researchers often use panel data to estimate causal effects, and 
-as Athey and Imbens (2016) show, data-driven HTE estimation has much better qualities compared to testing researchers' pre-defined hypotheses.
+as Athey and Imbens (2016) show, data-driven HTE estimation has much better qualities compared to testing researchers' pre-defined hypotheses. 
+Also, it is well established that R-learners specifically outperform in estimating HTEs nonparametrically(Robinson, 1988; Wager and Athey, 2018; Nie and Wager, 2020).
 
+# Notations
+
++ $Y_{it}$: outcome variable for individual $i$ in period $t$.
++ $D_{it}$: treatment indicator for individual $i$ in period $t$.
++ $E_{i} = \min \{t: D_{it}=1\}$: treatment adoption time for individual $i$.
++ $X_i$: individual-level covariates.
++ $S_{it} = t - E_i$: time of exposure to the treatment for individual $i$ in period $t$
 
 # Metalearner
 
-## X-Learner
+We want to estimate the following CATT:
 
+$$
+CATT(x, s) = \mathbb{E}[Y_{it} | X_i = x, S_{it} = s] - \mathbb{E}[Y_{it} | X_i = x, S_{it} = 0]
+$$
+
+which would, in some sense, give us event study plots for each $x$ value.
 
 ## R-Learner
 
+### DGP for the Panel Case
+
 \begin{align}
-R &= A\tau(X) + g_0(X) + \varepsilon \label{eq:R} \\
-A &= m_o(X) + \nu \label{eq:A}
+Y_{it} &= \sum_{s=1}^T \mathbb{I}(S_{it} = s)\tau(X_i,s) + g_0(X_i, \delta_t) + \varepsilon \\
+D_{it} &= m_o(X_i) + \nu 
 \end{align}
 
-where 
+where $\varepsilon$ and $\nu$ satisfies $\mathbb{E}[\varepsilon |D,  X] = 0$ and $\mathbb{E}[\nu | X] = 0$.
+
+$(1)$ implies that for untreated individuals and periods,
+
+$$
+Y_{it} - Y_{it'} = g_0(X_i, \delta_t) - g_0(X_i, \delta_t') \qquad \forall t \neq t'
+$$
+
+i.e., we can allow the trends to vary.
+
+
+We can interpret the model as follows:
+
+\begin{align}
+l_0(X) &:= 
+m_o(X) &= \mathbb{E}[D | X] \quad (\text{Propensity Score})
+\end{align}
 
 
 # Staggered Treatment Assumptions
@@ -39,10 +70,27 @@ where
 As Sun and Abraham (2020) does, we also need the constant dynamic treatment effect assumption:
 
 \begin{align}
-G_
+E[Y_{i,e+s} - Y_{i, e+s}^\infty \mid E_i = e] = \alpha_s \quad \forall e \in \{1, \ldots, T, \infty\}
 \end{align}
 
 where
 
-+ $G_i = \min \{t: D_{i,t}=1\}$ is the first period that the individual $i$ is treated.
++ $E_i = \min \{t: D_{i,t}=1\}$ is the first period that the individual $i$ is treated.
 + $D_{i,t}$ is the treatment indicator for individual $i$ in period $t$.
+
+# LongBet Setup
+
+\begin{align}
+Y_{it} &= Y_{it}(0) +  \sum_{s=1}^T \mathbb{1}(t = e_i+S)\bigl(Y_{it}(S) - Y(0) \bigr)\\
+Y_{it}(S) &\perp <D_{i1}, D_{i2}, \dots, D_{iT}> | X_i \qquad \forall S=0, 1, \dots T
+\end{align}
+
+We further assume that each individual is iid, and that **overlap** is satisfied.
+
+
+### Treatment Effects
+
+\begin{align}
+\tau_t(x, S) &:= \mathbb{E}[Y_{it}(S) - Y_{it}(0) | X_i = x, S]\\
+&=\mathbb{E}[Y_{it} | X_i = x, S] - \mathbb{E}[Y_{it} | X_i = x, S=0]
+\end{align}
