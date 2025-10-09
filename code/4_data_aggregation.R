@@ -53,7 +53,7 @@ if(reattach_quartile){
 
 }
 
-### write to database
+### write to database ----
 if(rewrite_database){
   dbExecute(con, "DROP TABLE IF EXISTS ACS_00_14_preprocessed")
   dbWriteTable(con, "ACS_00_14_preprocessed", data)
